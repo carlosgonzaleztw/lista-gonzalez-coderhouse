@@ -5,6 +5,11 @@ import ThemeColors from '../../styles/colors';
 const TaskInput = ({ onSubmit }) => {
   const [inputText, setInputText] = useState('');
 
+  const handleOnSubmit = () => {
+    onSubmit(inputText);
+    setInputText('');
+  };
+
   const handleInputChange = (text) => {
     setInputText(text);
   };
@@ -17,7 +22,7 @@ const TaskInput = ({ onSubmit }) => {
         style={styles.input}
         onChangeText={(text) => handleInputChange(text)}
       ></TextInput>
-      <Pressable style={styles.button} onPress={() => onSubmit(inputText)}>
+      <Pressable style={styles.button} onPress={handleOnSubmit}>
         <Text style={styles.buttonText}>Add</Text>
       </Pressable>
     </View>
