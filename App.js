@@ -4,14 +4,7 @@ import { useState } from 'react';
 import TasksList from './components/TasksList/TasksList';
 
 export default function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      description:
-        'This is a really nice long text so it will take two rows at least',
-      isChecked: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   const addTask = (description) => {
     if (description !== '') {
@@ -22,6 +15,24 @@ export default function App() {
     }
   };
 
+  const handleTaskCheckChange = (taskId) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        task.isChecked = !task.isChecked;
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  };
+  const handleTaskDelete = (taskId) => {
+    const updatedTasks = tasks.filter((task) => {
+      return task.id !== taskId;
+    });
+
+    setTasks(updatedTasks);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Todos!</Text>
@@ -30,7 +41,11 @@ export default function App() {
           onSubmit={(taskDescription) => addTask(taskDescription)}
         ></TaskInput>
       </View>
-      <TasksList data={tasks}></TasksList>
+      <TasksList
+        data={tasks}
+        onTaskCheckChange={(id) => handleTaskCheckChange(id)}
+        onTaskDelete={(id) => handleTaskDelete(id)}
+      ></TasksList>
     </View>
   );
 }

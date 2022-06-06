@@ -20,7 +20,7 @@ const Task = ({ onDelete, isChecked, onCheckChange, description }) => {
         ]}
         onPress={onDelete}
       >
-        <Text style={styles.buttonText}>x</Text>
+        <Text style={styles.buttonText}>X</Text>
       </Pressable>
     </View>
   );
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '500',
   },
 });

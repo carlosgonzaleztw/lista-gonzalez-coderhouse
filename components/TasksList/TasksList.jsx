@@ -2,15 +2,15 @@ import { StyleSheet, FlatList } from 'react-native';
 import React from 'react';
 import Task from '../common/Task/Task';
 
-const TasksList = ({ data }) => {
+const TasksList = ({ data, onTaskCheckChange, onTaskDelete }) => {
   const renderItem = ({ item }) => {
     return (
       <Task
         isChecked={item.isChecked}
         description={item.description}
         key={item.id}
-        onCheckChange={() => console.log('changing check')}
-        onDelete={() => null}
+        onCheckChange={() => onTaskCheckChange(item.id)}
+        onDelete={() => onTaskDelete(item.id)}
       ></Task>
     );
   };
