@@ -5,7 +5,12 @@ import TasksList from './components/TasksList/TasksList';
 
 export default function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, description: 'text', isChecked: false },
+    {
+      id: 1,
+      description:
+        'this is a really nice long text so it will take two rows at least',
+      isChecked: false,
+    },
   ]);
 
   const addTask = (description) => {
@@ -37,6 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     paddingTop: 50,
+    paddingHorizontal: 20,
+    width: '100%',
   },
   title: {
     fontSize: 30,

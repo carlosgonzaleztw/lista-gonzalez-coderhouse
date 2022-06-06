@@ -27,7 +27,7 @@ const TaskInput = ({ onSubmit }) => {
 export default TaskInput;
 
 const styles = StyleSheet.create({
-  root: { width: '90%' },
+  root: { width: '100%' },
   input: {
     backgroundColor: ThemeColors.inputBackgroundColor,
     color: ThemeColors.inputTextColor,

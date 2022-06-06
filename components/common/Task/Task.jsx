@@ -20,7 +20,7 @@ export default Task;
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
-    width: '80%',
+    paddingHorizontal: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
