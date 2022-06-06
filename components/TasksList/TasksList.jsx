@@ -8,7 +8,6 @@ const TasksList = ({ data, onTaskCheckChange, onTaskDelete }) => {
       <Task
         isChecked={item.isChecked}
         description={item.description}
-        key={item.id}
         onCheckChange={() => onTaskCheckChange(item.id)}
         onDelete={() => onTaskDelete(item.id)}
       ></Task>
@@ -20,7 +19,7 @@ const TasksList = ({ data, onTaskCheckChange, onTaskDelete }) => {
       data={data}
       renderItem={renderItem}
       style={styles.root}
-      contentInset={{ right: 20, top: 20, left: 0, bottom: 20 }}
+      keyExtractor={(item) => item.id}
     />
   );
 };
