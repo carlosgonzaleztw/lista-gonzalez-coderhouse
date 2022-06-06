@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import TaskInput from './components/TaskInput/TaskInput';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.title}>Todos!</Text>
+      <TaskInput onPress={() => console.log('pressed from APP')}></TaskInput>
     </View>
   );
 }
@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: '600',
+    marginBottom: 20,
   },
 });
