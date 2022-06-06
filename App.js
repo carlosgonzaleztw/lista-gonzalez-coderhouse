@@ -1,11 +1,32 @@
 import { StyleSheet, Text, View } from 'react-native';
 import TaskInput from './components/TaskInput/TaskInput';
+import { useState } from 'react';
+import TasksList from './components/TasksList/TasksList';
 
 export default function App() {
+  const [tasks, setTasks] = useState([
+    { id: 1, description: 'text', isChecked: false },
+  ]);
+
+  const addTask = (description) => {
+    if (description !== '') {
+      setTasks((currentTasks) => [
+        ...currentTasks,
+        { id: Math.random(), description: description, isChecked: false },
+      ]);
+    }
+    console.log('TASKS: ', tasks);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Todos!</Text>
-      <TaskInput onPress={() => console.log('pressed from APP')}></TaskInput>
+      <View style={styles.inputWrapper}>
+        <TaskInput
+          onSubmit={(taskDescription) => addTask(taskDescription)}
+        ></TaskInput>
+      </View>
+      <TasksList data={tasks}></TasksList>
     </View>
   );
 }
@@ -21,5 +42,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '600',
     marginBottom: 20,
+  },
+  inputWrapper: {
+    width: '100%',
+    marginBottom: 30,
+    alignItems: 'center',
   },
 });

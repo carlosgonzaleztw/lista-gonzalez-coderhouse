@@ -1,12 +1,23 @@
 import { Pressable, View, TextInput, StyleSheet, Text } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import ThemeColors from '../../styles/colors';
 
-const TaskInput = ({ onPress }) => {
+const TaskInput = ({ onSubmit }) => {
+  const [inputText, setInputText] = useState('');
+
+  const handleInputChange = (text) => {
+    setInputText(text);
+  };
+
   return (
     <View style={styles.root}>
-      <TextInput placeholder="Create new task" style={styles.input}></TextInput>
-      <Pressable style={styles.button} onPress={onPress}>
+      <TextInput
+        value={inputText}
+        placeholder="Create new task"
+        style={styles.input}
+        onChangeText={(text) => handleInputChange(text)}
+      ></TextInput>
+      <Pressable style={styles.button} onPress={() => onSubmit(inputText)}>
         <Text style={styles.buttonText}>Add</Text>
       </Pressable>
     </View>
