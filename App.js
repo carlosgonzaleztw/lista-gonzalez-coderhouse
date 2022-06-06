@@ -8,7 +8,7 @@ export default function App() {
     {
       id: 1,
       description:
-        'this is a really nice long text so it will take two rows at least',
+        'This is a really nice long text so it will take two rows at least',
       isChecked: false,
     },
   ]);
@@ -20,7 +20,6 @@ export default function App() {
         { id: Math.random(), description: description, isChecked: false },
       ]);
     }
-    console.log('TASKS: ', tasks);
   };
 
   return (

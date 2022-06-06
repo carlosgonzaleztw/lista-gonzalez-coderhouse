@@ -7,8 +7,19 @@ const Task = ({ onDelete, isChecked, onCheckChange, description }) => {
   return (
     <View style={styles.root}>
       <CheckBox value={isChecked} onValueChange={onCheckChange}></CheckBox>
-      <Text style={styles.text}>{description}</Text>
-      <Pressable style={styles.button} onPress={onDelete}>
+      <Text style={[isChecked ? styles.disabled : '', styles.text]}>
+        {description}
+      </Text>
+      <Pressable
+        disabled={isChecked}
+        style={[
+          styles.button,
+          isChecked
+            ? { backgroundColor: ThemeColors.disabledText }
+            : { backgroundColor: ThemeColors.accent },
+        ]}
+        onPress={onDelete}
+      >
         <Text style={styles.buttonText}>x</Text>
       </Pressable>
     </View>
@@ -23,18 +34,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 20,
   },
   text: {
     width: '60%',
   },
+  disabled: {
+    color: ThemeColors.disabledText,
+    textDecorationLine: 'line-through',
+  },
   button: {
-    backgroundColor: ThemeColors.accent,
     borderRadius: 100,
     alignItems: 'center',
     height: 30,
     width: 30,
     justifyContent: 'center',
   },
+
   buttonText: {
     color: 'white',
     fontSize: 16,
