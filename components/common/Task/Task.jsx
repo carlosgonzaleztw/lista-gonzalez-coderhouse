@@ -11,7 +11,6 @@ const Task = ({ onDelete, isChecked, onCheckChange, description }) => {
         {description}
       </Text>
       <Pressable
-        disabled={isChecked}
         style={[
           styles.button,
           isChecked
