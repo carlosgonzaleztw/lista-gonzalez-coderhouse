@@ -3,19 +3,22 @@ import React from 'react';
 import ThemeColors from '../../../styles/colors';
 import CheckBox from 'expo-checkbox';
 
-const Task = ({ onDelete, isChecked, onCheckChange, description }) => {
+const Task = ({ onDelete, isChecked, onCheckChange, title }) => {
   return (
     <View style={styles.root}>
       <CheckBox value={isChecked} onValueChange={onCheckChange}></CheckBox>
-      <Text style={[isChecked ? styles.disabled : '', styles.text]}>
-        {description}
-      </Text>
+      <View style={styles.textWrapper}>
+        <Text style={[isChecked ? styles.disabled : '', styles.title]}>
+          {title}
+        </Text>
+        <Text style={styles.description}>Click to see the details</Text>
+      </View>
       <Pressable
         style={[
           styles.button,
           isChecked
             ? { backgroundColor: ThemeColors.disabledText }
-            : { backgroundColor: ThemeColors.accent },
+            : { backgroundColor: ThemeColors.primary },
         ]}
         onPress={onDelete}
       >
@@ -35,9 +38,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  text: {
+  textWrapper: {
     width: '60%',
   },
+  title: { fontSize: 16, fontWeight: 'bold' },
+  description: { fontSize: 10 },
   disabled: {
     color: ThemeColors.disabledText,
     textDecorationLine: 'line-through',

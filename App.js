@@ -1,16 +1,37 @@
 import { StyleSheet, Text, View } from 'react-native';
-import TaskInput from './components/TaskInput/TaskInput';
 import { useState } from 'react';
-import TasksList from './components/TasksList/TasksList';
+import ListScreen from './screens/ListScreen/ListScreen';
+import TaskDetailsScreen from './screens/TaskDetailsScreen/TaskDetailsScreen';
 
 export default function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    {
+      title: 'What happens if a title is way too long?',
+      description:
+        'This is a description for a tasks that has more than one line, in fact I believe it will be more than two lines',
+      id: 1,
+      isChecked: false,
+    },
+  ]);
 
-  const addTask = (description) => {
+  const [selectedTask, setSelectedTask] = useState({
+    title: 'What happens if a title is way too long?',
+    description:
+      'This is a description for a tasks that has more than one line, in fact I believe it will be more than two lines',
+    id: 1,
+    isChecked: false,
+  });
+
+  const addTask = (title, description) => {
     if (description !== '') {
       setTasks((currentTasks) => [
         ...currentTasks,
-        { id: Math.random(), description: description, isChecked: false },
+        {
+          id: Math.random(),
+          title: title,
+          description: description,
+          isChecked: false,
+        },
       ]);
     }
   };
@@ -33,21 +54,33 @@ export default function App() {
     setTasks(updatedTasks);
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Todos!</Text>
-      <View style={styles.inputWrapper}>
-        <TaskInput
-          onSubmit={(taskDescription) => addTask(taskDescription)}
-        ></TaskInput>
-      </View>
-      <TasksList
-        data={tasks}
-        onTaskCheckChange={(id) => handleTaskCheckChange(id)}
-        onTaskDelete={(id) => handleTaskDelete(id)}
-      ></TasksList>
-    </View>
+  let content;
+
+  console.log('Seleted task: ', selectedTask);
+  content = (
+    <ListScreen
+      tasks={tasks}
+      handleOnAddTask={() =>
+        setSelectedTask({
+          id: Math.random(),
+          title: '',
+          description: '',
+          isChecked: false,
+        })
+      }
+    ></ListScreen>
   );
+
+  if (selectedTask !== null) {
+    content = (
+      <TaskDetailsScreen
+        task={selectedTask}
+        handleGoBack={() => setSelectedTask(null)}
+      ></TaskDetailsScreen>
+    );
+  }
+
+  return <View style={styles.container}>{content}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -57,16 +90,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 50,
     paddingHorizontal: 20,
-    width: '100%',
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: '600',
-    marginBottom: 20,
-  },
-  inputWrapper: {
-    width: '100%',
-    marginBottom: 30,
-    alignItems: 'center',
   },
 });
