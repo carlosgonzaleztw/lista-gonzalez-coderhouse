@@ -13,7 +13,7 @@ const TaskDetailsScreen = ({ task, handleGoBack }) => {
   };
 
   const handleCheckDone = () => {
-    setUpdatedTask({ ...updatedTask, isChecked: updatedTask.isChecked });
+    setUpdatedTask({ ...updatedTask, isChecked: !updatedTask.isChecked });
   };
 
   return (
@@ -37,7 +37,15 @@ const TaskDetailsScreen = ({ task, handleGoBack }) => {
       </View>
       <View style={styles.buttonsWrapper}>
         <Pressable
-          style={[styles.button, styles.doneButton]}
+          style={[
+            styles.button,
+            styles.doneButton,
+            {
+              backgroundColor: updatedTask.isChecked
+                ? ThemeColors.orange
+                : ThemeColors.primary,
+            },
+          ]}
           onPress={handleCheckDone}
         >
           <Text style={styles.buttonText}>
@@ -100,7 +108,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     width: '100%',
   },
-  doneButton: { backgroundColor: ThemeColors.primary, marginBottom: 5 },
+  doneButton: { marginBottom: 5 },
   backButton: {
     backgroundColor: ThemeColors.pink,
   },

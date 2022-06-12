@@ -86,6 +86,8 @@ export default function App() {
       tasks={tasks}
       onViewDetails={(task) => setSelectedTask(task)}
       handleOnAddTask={handleOnAddTask}
+      onTaskDelete={(task) => handleTaskDelete(task)}
+      onTaskCheckChange={(task) => handleTaskCheckChange(task)}
     ></ListScreen>
   );
 

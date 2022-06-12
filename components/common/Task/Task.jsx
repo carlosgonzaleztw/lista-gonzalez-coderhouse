@@ -6,7 +6,10 @@ import CheckBox from 'expo-checkbox';
 const Task = ({ onDelete, isChecked, onCheckChange, task, onViewDetails }) => {
   return (
     <View style={styles.root}>
-      <CheckBox value={isChecked} onValueChange={onCheckChange}></CheckBox>
+      <CheckBox
+        value={isChecked}
+        onValueChange={() => onCheckChange(task)}
+      ></CheckBox>
       <Pressable style={styles.textWrapper} onPress={() => onViewDetails(task)}>
         <Text style={[isChecked ? styles.disabled : '', styles.title]}>
           {task.title}
@@ -20,7 +23,7 @@ const Task = ({ onDelete, isChecked, onCheckChange, task, onViewDetails }) => {
             ? { backgroundColor: ThemeColors.disabledText }
             : { backgroundColor: ThemeColors.primary },
         ]}
-        onPress={onDelete}
+        onPress={() => onDelete(task)}
       >
         <Text style={styles.buttonText}>X</Text>
       </Pressable>
