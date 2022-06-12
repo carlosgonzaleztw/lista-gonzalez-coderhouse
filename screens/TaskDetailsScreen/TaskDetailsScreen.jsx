@@ -2,10 +2,15 @@ import { TextInput, StyleSheet, Text, View, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import ThemeColors from '../../styles/colors';
 
-const TaskDetailsScreen = ({ task, handleGoBack }) => {
+const TaskDetailsScreen = ({ task, onGoBack }) => {
   const [updatedTask, setUpdatedTask] = useState(task);
+  const [error, setError] = useState(false);
 
   const handleTitleChange = (title) => {
+    if (title !== '') {
+      setError(false);
+    }
+
     setUpdatedTask({ ...updatedTask, title: title });
   };
   const handleDescriptionChange = (description) => {
@@ -16,14 +21,24 @@ const TaskDetailsScreen = ({ task, handleGoBack }) => {
     setUpdatedTask({ ...updatedTask, isChecked: !updatedTask.isChecked });
   };
 
+  const handleGoBack = () => {
+    if (updatedTask.title === '') {
+      setError(true);
+      return;
+    }
+
+    onGoBack(updatedTask);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Task Details</Text>
       <View style={styles.inputsWrapper}>
+        {error && <Text style={styles.errorLabel}>Title is required</Text>}
         <TextInput
           value={updatedTask.title}
           multiline
-          style={styles.titleInput}
+          style={[styles.titleInput, error ? styles.inputError : '']}
           onChangeText={handleTitleChange}
           placeholder="Title"
         ></TextInput>
@@ -54,7 +69,7 @@ const TaskDetailsScreen = ({ task, handleGoBack }) => {
         </Pressable>
         <Pressable
           style={[styles.button, styles.backButton]}
-          onPress={() => handleGoBack(updatedTask)}
+          onPress={handleGoBack}
         >
           <Text style={styles.buttonText}>Go back</Text>
         </Pressable>
@@ -78,6 +93,15 @@ const styles = StyleSheet.create({
   },
   inputsWrapper: {
     width: '100%',
+  },
+  inputError: {
+    borderColor: 'red',
+    borderWidth: 2,
+    borderRadius: 5,
+  },
+  errorLabel: {
+    color: 'red',
+    fontSize: 12,
   },
   title: {
     fontSize: 30,

@@ -95,7 +95,7 @@ export default function App() {
     content = (
       <TaskDetailsScreen
         task={selectedTask}
-        handleGoBack={handleGoBack}
+        onGoBack={handleGoBack}
       ></TaskDetailsScreen>
     );
   }
