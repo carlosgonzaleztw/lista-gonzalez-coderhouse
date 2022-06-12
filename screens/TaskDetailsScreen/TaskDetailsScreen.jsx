@@ -1,27 +1,34 @@
 import { TextInput, StyleSheet, Text, View, Pressable } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import ThemeColors from '../../styles/colors';
 
-const TaskDetailsScreen = ({
-  task,
-  handleTitleChange,
-  handleDescriptionChange,
-  handleGoBack,
-  handleCheckDone,
-}) => {
+const TaskDetailsScreen = ({ task, handleGoBack }) => {
+  const [updatedTask, setUpdatedTask] = useState(task);
+
+  const handleTitleChange = (title) => {
+    setUpdatedTask({ ...updatedTask, title: title });
+  };
+  const handleDescriptionChange = (description) => {
+    setUpdatedTask({ ...updatedTask, description: description });
+  };
+
+  const handleCheckDone = () => {
+    setUpdatedTask({ ...updatedTask, isChecked: updatedTask.isChecked });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Task Details</Text>
       <View style={styles.inputsWrapper}>
         <TextInput
-          value={task?.title || ''}
+          value={updatedTask.title}
           multiline
           style={styles.titleInput}
           onChangeText={handleTitleChange}
           placeholder="Title"
         ></TextInput>
         <TextInput
-          value={task?.description || ''}
+          value={updatedTask.description}
           multiline
           style={styles.descriptionInput}
           onChangeText={handleDescriptionChange}
@@ -33,11 +40,13 @@ const TaskDetailsScreen = ({
           style={[styles.button, styles.doneButton]}
           onPress={handleCheckDone}
         >
-          <Text style={styles.buttonText}>Mark as done</Text>
+          <Text style={styles.buttonText}>
+            {updatedTask.isChecked ? 'Mark as in progress' : 'Mark as done'}
+          </Text>
         </Pressable>
         <Pressable
           style={[styles.button, styles.backButton]}
-          onPress={handleGoBack}
+          onPress={() => handleGoBack(updatedTask)}
         >
           <Text style={styles.buttonText}>Go back</Text>
         </Pressable>

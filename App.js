@@ -24,20 +24,6 @@ export default function App() {
 
   const [selectedTask, setSelectedTask] = useState(null);
 
-  const addTask = (title, description) => {
-    if (description !== '') {
-      setTasks((currentTasks) => [
-        ...currentTasks,
-        {
-          id: Math.random(),
-          title: title,
-          description: description,
-          isChecked: false,
-        },
-      ]);
-    }
-  };
-
   const handleTaskCheckChange = (taskId) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -48,6 +34,7 @@ export default function App() {
 
     setTasks(updatedTasks);
   };
+
   const handleTaskDelete = (taskId) => {
     const updatedTasks = tasks.filter((task) => {
       return task.id !== taskId;
@@ -65,17 +52,43 @@ export default function App() {
     });
   };
 
+  const handleGoBack = (currentTask) => {
+    const isNewTask = !tasks.some((task) => {
+      return task.id === currentTask.id;
+    });
+
+    if (isNewTask && currentTask.title !== '') {
+      setTasks([...tasks, currentTask]);
+    } else {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === currentTask.id) {
+          return currentTask;
+        } else {
+          return task;
+        }
+      });
+
+      setTasks(updatedTasks);
+    }
+
+    setSelectedTask(null);
+  };
+
   let content;
 
   content = (
-    <ListScreen tasks={tasks} handleOnAddTask={handleOnAddTask}></ListScreen>
+    <ListScreen
+      tasks={tasks}
+      onViewDetails={(task) => setSelectedTask(task)}
+      handleOnAddTask={handleOnAddTask}
+    ></ListScreen>
   );
 
   if (selectedTask !== null) {
     content = (
       <TaskDetailsScreen
         task={selectedTask}
-        handleGoBack={() => setSelectedTask(null)}
+        handleGoBack={handleGoBack}
       ></TaskDetailsScreen>
     );
   }

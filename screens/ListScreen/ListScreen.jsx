@@ -3,7 +3,7 @@ import React from 'react';
 import TasksList from '../../components/TasksList/TasksList';
 import ThemeColors from '../../styles/colors';
 
-const ListScreen = ({ tasks, handleOnAddTask }) => {
+const ListScreen = ({ tasks, handleOnAddTask, onViewDetails }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Todos!</Text>
@@ -16,6 +16,7 @@ const ListScreen = ({ tasks, handleOnAddTask }) => {
         tasks={tasks}
         onTaskCheckChange={(id) => null}
         onTaskDelete={(id) => null}
+        onViewDetails={(task) => onViewDetails(task)}
       ></TasksList>
     </View>
   );
