@@ -53,11 +53,16 @@ export default function App() {
   };
 
   const handleGoBack = (currentTask) => {
+    if (currentTask.title === '') {
+      setSelectedTask(null);
+      return;
+    }
+
     const isNewTask = !tasks.some((task) => {
       return task.id === currentTask.id;
     });
 
-    if (isNewTask && currentTask.title !== '') {
+    if (isNewTask) {
       setTasks([...tasks, currentTask]);
     } else {
       const updatedTasks = tasks.map((task) => {
