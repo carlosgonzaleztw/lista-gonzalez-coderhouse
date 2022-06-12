@@ -119,8 +119,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: ThemeColors.inputBackgroundColor,
     padding: 10,
-    height: 300,
+    maxHeight: 200,
     textAlignVertical: 'top',
+    marginBottom: 10,
   },
   buttonsWrapper: {
     width: '100%',

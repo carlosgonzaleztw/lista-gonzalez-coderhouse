@@ -12,15 +12,7 @@ const testTask = {
 };
 
 export default function App() {
-  const [tasks, setTasks] = useState([
-    {
-      title: 'What happens if a title is way too long?',
-      description:
-        'This is a description for a tasks that has more than one line, in fact I believe it will be more than two lines',
-      id: 1,
-      isChecked: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   const [selectedTask, setSelectedTask] = useState(null);
 
