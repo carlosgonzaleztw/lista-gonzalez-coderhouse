@@ -5,7 +5,7 @@ import ThemeColors from '../../styles/colors';
 
 const ListScreen = ({
   tasks,
-  handleOnAddTask,
+  onAddTask,
   onViewDetails,
   onTaskDelete,
   onTaskCheckChange,
@@ -14,7 +14,7 @@ const ListScreen = ({
     <View style={styles.container}>
       <Text style={styles.title}>Todos!</Text>
       <View style={styles.inputWrapper}>
-        <Pressable style={styles.button} onPress={handleOnAddTask}>
+        <Pressable style={styles.button} onPress={onAddTask}>
           <Text style={styles.buttonText}>Create a new task</Text>
         </Pressable>
       </View>

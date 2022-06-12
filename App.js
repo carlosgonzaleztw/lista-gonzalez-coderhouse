@@ -84,8 +84,8 @@ export default function App() {
   content = (
     <ListScreen
       tasks={tasks}
+      onAddTask={handleOnAddTask}
       onViewDetails={(task) => setSelectedTask(task)}
-      handleOnAddTask={handleOnAddTask}
       onTaskDelete={(task) => handleTaskDelete(task)}
       onTaskCheckChange={(task) => handleTaskCheckChange(task)}
     ></ListScreen>
