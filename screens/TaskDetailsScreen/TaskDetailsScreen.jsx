@@ -7,11 +7,12 @@ const TaskDetailsScreen = ({
   handleTitleChange,
   handleDescriptionChange,
   handleGoBack,
+  handleCheckDone,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Task Details</Text>
-      <View>
+      <View style={styles.inputsWrapper}>
         <TextInput
           value={task?.title || ''}
           multiline
@@ -30,7 +31,7 @@ const TaskDetailsScreen = ({
       <View style={styles.buttonsWrapper}>
         <Pressable
           style={[styles.button, styles.doneButton]}
-          onPress={handleGoBack}
+          onPress={handleCheckDone}
         >
           <Text style={styles.buttonText}>Mark as done</Text>
         </Pressable>
@@ -58,6 +59,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: '100%',
   },
+  inputsWrapper: {
+    width: '100%',
+  },
   title: {
     fontSize: 30,
     fontWeight: '600',
@@ -68,6 +72,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     backgroundColor: ThemeColors.inputBackgroundColor,
+    width: '100%',
   },
   descriptionInput: {
     fontSize: 16,

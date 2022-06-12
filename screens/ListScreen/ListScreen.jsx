@@ -3,13 +3,13 @@ import React from 'react';
 import TasksList from '../../components/TasksList/TasksList';
 import ThemeColors from '../../styles/colors';
 
-const ListScreen = (tasks, handleOnAddTask) => {
+const ListScreen = ({ tasks, handleOnAddTask }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Todos!</Text>
       <View style={styles.inputWrapper}>
         <Pressable style={styles.button} onPress={handleOnAddTask}>
-          <Text style={styles.buttonText}>Add a new task</Text>
+          <Text style={styles.buttonText}>Create a new task</Text>
         </Pressable>
       </View>
       <TasksList

@@ -3,6 +3,14 @@ import { useState } from 'react';
 import ListScreen from './screens/ListScreen/ListScreen';
 import TaskDetailsScreen from './screens/TaskDetailsScreen/TaskDetailsScreen';
 
+const testTask = {
+  title: 'What happens if a title is way too long?',
+  description:
+    'This is a description for a tasks that has more than one line, in fact I believe it will be more than two lines',
+  id: 1,
+  isChecked: false,
+};
+
 export default function App() {
   const [tasks, setTasks] = useState([
     {
@@ -14,13 +22,7 @@ export default function App() {
     },
   ]);
 
-  const [selectedTask, setSelectedTask] = useState({
-    title: 'What happens if a title is way too long?',
-    description:
-      'This is a description for a tasks that has more than one line, in fact I believe it will be more than two lines',
-    id: 1,
-    isChecked: false,
-  });
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const addTask = (title, description) => {
     if (description !== '') {
@@ -54,21 +56,19 @@ export default function App() {
     setTasks(updatedTasks);
   };
 
+  const handleOnAddTask = () => {
+    setSelectedTask({
+      id: Math.random(),
+      title: '',
+      description: '',
+      isChecked: false,
+    });
+  };
+
   let content;
 
-  console.log('Seleted task: ', selectedTask);
   content = (
-    <ListScreen
-      tasks={tasks}
-      handleOnAddTask={() =>
-        setSelectedTask({
-          id: Math.random(),
-          title: '',
-          description: '',
-          isChecked: false,
-        })
-      }
-    ></ListScreen>
+    <ListScreen tasks={tasks} handleOnAddTask={handleOnAddTask}></ListScreen>
   );
 
   if (selectedTask !== null) {
