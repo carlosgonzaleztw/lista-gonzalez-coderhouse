@@ -6,6 +6,8 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
   const [updatedTask, setUpdatedTask] = useState(task);
   const [error, setError] = useState(false);
 
+  const newTask = task.title === '' ? true : false;
+
   const handleTitleChange = (title) => {
     if (title !== '') {
       setError(false);
@@ -22,7 +24,7 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
   };
 
   const handleGoBack = () => {
-    if (updatedTask.title === '') {
+    if (updatedTask.title === '' && !newTask) {
       setError(true);
       return;
     }
@@ -51,22 +53,37 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
         ></TextInput>
       </View>
       <View style={styles.buttonsWrapper}>
-        <Pressable
-          style={[
-            styles.button,
-            styles.doneButton,
-            {
-              backgroundColor: updatedTask.isChecked
-                ? ThemeColors.orange
-                : ThemeColors.primary,
-            },
-          ]}
-          onPress={handleCheckDone}
-        >
-          <Text style={styles.buttonText}>
-            {updatedTask.isChecked ? 'Mark as in progress' : 'Mark as done'}
-          </Text>
-        </Pressable>
+        {newTask ? (
+          <Pressable
+            style={[
+              styles.button,
+              styles.doneButton,
+              {
+                backgroundColor: ThemeColors.primary,
+              },
+            ]}
+            onPress={handleGoBack}
+          >
+            <Text style={styles.buttonText}>Create new task</Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            style={[
+              styles.button,
+              styles.doneButton,
+              {
+                backgroundColor: updatedTask.isChecked
+                  ? ThemeColors.orange
+                  : ThemeColors.primary,
+              },
+            ]}
+            onPress={handleCheckDone}
+          >
+            <Text style={styles.buttonText}>
+              {updatedTask.isChecked ? 'Mark as in progress' : 'Mark as done'}
+            </Text>
+          </Pressable>
+        )}
         <Pressable
           style={[styles.button, styles.backButton]}
           onPress={handleGoBack}
