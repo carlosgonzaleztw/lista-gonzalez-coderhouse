@@ -3,7 +3,7 @@ import React from 'react';
 
 const CustomText = ({ style, children, ...props }) => {
   return (
-    <Text {...props} style={{ ...styles.text, ...style }}>
+    <Text {...props} style={[styles.text, style]}>
       {children}
     </Text>
   );

@@ -23,7 +23,7 @@ const TaskInput = ({ onSubmit }) => {
         onChangeText={(text) => handleInputChange(text)}
       ></TextInput>
       <Pressable style={styles.button} onPress={handleOnSubmit}>
-        <Text style={styles.buttonText}>Add</Text>
+        <CustomText style={styles.buttonText}>Add</CustomText>
       </Pressable>
     </View>
   );

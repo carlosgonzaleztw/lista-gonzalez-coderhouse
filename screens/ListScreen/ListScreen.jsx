@@ -3,6 +3,7 @@ import React from 'react';
 import TasksList from '../../components/TasksList/TasksList';
 import ThemeColors from '../../styles/colors';
 import Header from '../../components/common/Header/Header';
+import CustomText from '../../components/common/CustomText/CustomText';
 
 const ListScreen = ({
   tasks,
@@ -16,7 +17,7 @@ const ListScreen = ({
       <Header title={'Todos!'} />
       <View style={styles.inputWrapper}>
         <Pressable style={styles.button} onPress={onAddTask}>
-          <Text style={styles.buttonText}>Create a new task</Text>
+          <CustomText style={styles.buttonText}>Create a new task</CustomText>
         </Pressable>
       </View>
       <TasksList

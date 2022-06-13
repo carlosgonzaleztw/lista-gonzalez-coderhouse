@@ -2,6 +2,8 @@ import { TextInput, StyleSheet, Text, View, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import ThemeColors from '../../styles/colors';
 import Header from '../../components/common/Header/Header';
+import CustomText from '../../components/common/CustomText/CustomText';
+import CustomTextInput from '../../components/common/CustomTextInput/CustomTextInput';
 
 const TaskDetailsScreen = ({ task, onGoBack }) => {
   const [updatedTask, setUpdatedTask] = useState(task);
@@ -37,21 +39,27 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
     <View style={styles.container}>
       <Header title={'Task Details'} />
       <View style={styles.inputsWrapper}>
-        {error && <Text style={styles.errorLabel}>Title is required</Text>}
-        <TextInput
+        {error && (
+          <CustomText style={styles.errorLabel}>Title is required</CustomText>
+        )}
+        <CustomTextInput
           value={updatedTask.title}
           multiline
           style={[styles.titleInput, error ? styles.inputError : '']}
           onChangeText={handleTitleChange}
           placeholder="Title"
-        ></TextInput>
-        <TextInput
+          editable={!updatedTask.isChecked}
+          selectTextOnFocus={!updatedTask.isChecked}
+        ></CustomTextInput>
+        <CustomTextInput
           value={updatedTask.description}
           multiline
           style={styles.descriptionInput}
           onChangeText={handleDescriptionChange}
           placeholder="Description"
-        ></TextInput>
+          editable={!updatedTask.isChecked}
+          selectTextOnFocus={!updatedTask.isChecked}
+        ></CustomTextInput>
       </View>
       <View style={styles.buttonsWrapper}>
         {newTask ? (
@@ -65,7 +73,7 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
             ]}
             onPress={handleGoBack}
           >
-            <Text style={styles.buttonText}>Create new task</Text>
+            <CustomText style={styles.buttonText}>Create new task</CustomText>
           </Pressable>
         ) : (
           <Pressable
@@ -80,16 +88,16 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
             ]}
             onPress={handleCheckDone}
           >
-            <Text style={styles.buttonText}>
+            <CustomText style={styles.buttonText}>
               {updatedTask.isChecked ? 'Mark as in progress' : 'Mark as done'}
-            </Text>
+            </CustomText>
           </Pressable>
         )}
         <Pressable
           style={[styles.button, styles.backButton]}
           onPress={handleGoBack}
         >
-          <Text style={styles.buttonText}>Go back</Text>
+          <CustomText style={styles.buttonText}>Go back</CustomText>
         </Pressable>
       </View>
     </View>
@@ -157,6 +165,5 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontWeight: 'bold',
   },
 });

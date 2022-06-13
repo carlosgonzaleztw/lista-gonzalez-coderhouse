@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
 import ThemeColors from '../../../styles/colors';
 import CheckBox from 'expo-checkbox';
+import CustomText from '../CustomText/CustomText';
 
 const Task = ({ onDelete, isChecked, onCheckChange, task, onViewDetails }) => {
   return (
@@ -11,10 +12,12 @@ const Task = ({ onDelete, isChecked, onCheckChange, task, onViewDetails }) => {
         onValueChange={() => onCheckChange(task)}
       ></CheckBox>
       <Pressable style={styles.textWrapper} onPress={() => onViewDetails(task)}>
-        <Text style={[isChecked ? styles.disabled : '', styles.title]}>
+        <CustomText style={[isChecked ? styles.disabled : '', styles.title]}>
           {task.title}
-        </Text>
-        <Text style={styles.description}>Press to see the details</Text>
+        </CustomText>
+        <CustomText style={styles.description}>
+          Press to see the details
+        </CustomText>
       </Pressable>
       <Pressable
         style={[
@@ -25,7 +28,7 @@ const Task = ({ onDelete, isChecked, onCheckChange, task, onViewDetails }) => {
         ]}
         onPress={() => onDelete(task)}
       >
-        <Text style={styles.buttonText}>X</Text>
+        <CustomText style={styles.buttonText}>X</CustomText>
       </Pressable>
     </View>
   );
@@ -44,7 +47,10 @@ const styles = StyleSheet.create({
   textWrapper: {
     width: '60%',
   },
-  title: { fontSize: 16, fontWeight: 'bold' },
+  title: {
+    fontSize: 18,
+    fontFamily: 'poppins-bold',
+  },
   description: { fontSize: 10 },
   disabled: {
     color: ThemeColors.disabledText,
