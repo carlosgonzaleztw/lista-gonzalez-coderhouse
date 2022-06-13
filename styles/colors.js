@@ -7,6 +7,7 @@ const ThemeColors = {
   pink: '#d90368ff',
   purple: '#820263ff',
   darkPurple: '#291720ff',
+  textColor: '#000000',
 };
 
 export default ThemeColors;

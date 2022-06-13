@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import TasksList from '../../components/TasksList/TasksList';
 import ThemeColors from '../../styles/colors';
+import Header from '../../components/common/Header/Header';
 
 const ListScreen = ({
   tasks,
@@ -12,7 +13,7 @@ const ListScreen = ({
 }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Todos!</Text>
+      <Header title={'Todos!'} />
       <View style={styles.inputWrapper}>
         <Pressable style={styles.button} onPress={onAddTask}>
           <Text style={styles.buttonText}>Create a new task</Text>

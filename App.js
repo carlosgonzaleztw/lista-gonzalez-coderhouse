@@ -1,20 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import ListScreen from './screens/ListScreen/ListScreen';
 import TaskDetailsScreen from './screens/TaskDetailsScreen/TaskDetailsScreen';
-
-const testTask = {
-  title: 'What happens if a title is way too long?',
-  description:
-    'This is a description for a tasks that has more than one line, in fact I believe it will be more than two lines',
-  id: 1,
-  isChecked: false,
-};
+import { useFonts } from 'expo-font';
+import ThemeColors from './styles/colors';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
-
   const [selectedTask, setSelectedTask] = useState(null);
+  const [loaded] = useFonts({
+    'poppins-regular': require('./assets/fonts/Poppins/Poppins-Regular.ttf'),
+    'poppins-bold': require('./assets/fonts/Poppins/Poppins-Bold.ttf'),
+    'poppins-italic': require('./assets/fonts/Poppins/Poppins-Italic.ttf'),
+  });
+
+  if (!loaded) {
+    return <ActivityIndicator size="large" color={ThemeColors.primary} />;
+  }
 
   const handleTaskCheckChange = (taskId) => {
     const updatedTasks = tasks.map((task) => {
@@ -100,7 +102,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 50,
     paddingHorizontal: 20,
+    fontFamily: 'poppins-regular',
   },
 });

@@ -1,6 +1,7 @@
 import { TextInput, StyleSheet, Text, View, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import ThemeColors from '../../styles/colors';
+import Header from '../../components/common/Header/Header';
 
 const TaskDetailsScreen = ({ task, onGoBack }) => {
   const [updatedTask, setUpdatedTask] = useState(task);
@@ -34,7 +35,7 @@ const TaskDetailsScreen = ({ task, onGoBack }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Task Details</Text>
+      <Header title={'Task Details'} />
       <View style={styles.inputsWrapper}>
         {error && <Text style={styles.errorLabel}>Title is required</Text>}
         <TextInput
